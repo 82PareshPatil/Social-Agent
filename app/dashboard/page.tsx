@@ -2,12 +2,15 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getInsForgeServer } from '@/lib/insforge-server';
 import { signOut } from '@/lib/auth-actions';
+import { firstCampaign } from '@/lib/campaigns';
 import styles from '@/components/auth.module.css';
 
 export default async function Dashboard() {
   const client = await getInsForgeServer();
   const { data: session, error: authError } = await client.auth.getCurrentUser();
   if (authError || !session?.user) redirect('/sign-in');
+  const campaign = await firstCampaign(session.user.id);
+  if (!campaign) redirect('/create-campaign');
   const { error } = await client.database.rpc('ensure_user_profile');
   if (error) throw new Error('Your profile could not be loaded. Please retry.');
   const { data: profile, error: readError } = await client.database.from('users')
@@ -27,7 +30,7 @@ export default async function Dashboard() {
         <span className={styles.avatar}>{String(profile.name || profile.email).slice(0, 1).toUpperCase()}</span>
         <div><h2>Your account is ready</h2><p>{profile.email}</p><span className={styles.status}>● Profile saved</span></div>
       </div>
-      <div className={styles.dashboardNote}><h2>A home for your social ideas</h2><p>Your account is connected. Campaign and content tools will appear here as they’re added.</p></div>
+      <div className={styles.dashboardNote}><h2>{campaign.icon_url ? <img src={campaign.icon_url} alt="Campaign icon" width={32} height={32}/> : campaign.icon} {campaign.name}</h2><p>Your campaign workspace is ready.</p><img src={campaign.office_image} alt="Your selected AI agent office" style={{width:'100%',maxHeight:420,objectFit:'cover',borderRadius:14}}/></div>
     </section>
   </main>;
 }
