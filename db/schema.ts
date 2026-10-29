@@ -31,7 +31,7 @@ export const users = pgTable('users', {
 export type UserProfile = typeof users.$inferSelect;
 
 export const campaigns = pgTable('campaigns', {
-  id: serial('id').primaryKey(), userId: owner(), name: text('name').notNull(),
+  id: serial('id').primaryKey(), userId: owner().unique(), name: text('name').notNull(),
   icon: text('icon'), iconUrl: text('icon_url'), iconKey: text('icon_key'),
   officeImage: text('office_image').notNull(),
   createdAt: timestamp('created_at').notNull().defaultNow(),

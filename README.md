@@ -1,5 +1,19 @@
 # Social Agent
 
+## Campaign onboarding
+
+Signed-in users without a campaign are redirected from `/dashboard` to
+`/create-campaign`. The two-step form collects a name, preset/custom icon, and
+one of the two office images copied from `Free/public/offices` to `public/offices`.
+Existing campaign owners go straight to the dashboard.
+
+`20261029171337_create-campaign-onboarding.sql` is applied to the linked backend.
+The current onboarding supports one campaign per user; the unique user constraint
+also prevents duplicate submissions. Campaign rows use owner-only RLS.
+Custom PNG/JPEG/WebP icons under 900 KB are stored in the public `campaign-icons`
+bucket under the user's UUID; both URL and key are saved. Failed inserts clean up
+new uploads. Other legacy application migrations remain unapplied.
+
 ## Local development
 
 1. Run `npm install`.
