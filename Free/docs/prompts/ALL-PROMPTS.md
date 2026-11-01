@@ -26,6 +26,7 @@ Use the InsForge CLI and skills for backend tasks.
 ```
 
 Follow-up:
+
 ```text
 Is InsForge connected?
 ```
@@ -64,11 +65,13 @@ Implement it with a professional UI/UX page.
 ```
 
 Follow-ups (design polish):
+
 ```text
 Update the UI/UX with a professional Dribbble-template style for all the pages, including this Create Campaign page.
 I don't want any scrolling on this page, so make sure it fits properly; use cards if needed. Use blue as the primary
 color for this application.
 ```
+
 ```text
 Let's implement something like this (reference image attached), not full page.
 ```
@@ -108,13 +111,16 @@ even when the window is resized.
 ```
 
 Follow-ups:
+
 ```text
 For some reason the office background image is not showing. Fix it, or else use the related office image from the
 public folder and update it in the JSON.
 ```
+
 ```text
 Can you make it full height? Is it possible?
 ```
+
 ```text
 Let's add a popover just above each agent showing the agent name, like Research Agent, Creator Agent, etc., for a social
 media agent platform, and along with the name show proper related icons/emoji.
@@ -136,10 +142,12 @@ maintain the existing UI/UX style.
 ```
 
 Follow-ups:
+
 ```text
 There is a lot of space between cards, and because of that the chat box is very small. Also make the agent row and its
 cards smaller.
 ```
+
 ```text
 Inside the Overview page, when the user clicks on any agent in the office preview section, show the chat option on the
 left side for that AI agent. Make sure the user does not jump to the Agent page. Just show the agent's profile image and
@@ -168,6 +176,7 @@ Save the chat conversation with each agent for that user in the database. Load t
 ```
 
 **Architecture planning (no code):** Before building further, a workflow plan was written to [agent-workflow.md](../agent-workflow.md):
+
 ```text
 Based on our app structure, help me restructure my workflow. The idea is to integrate a cloud VM desktop (Linux OS) with
 file storage, a browser, a terminal, etc. Each campaign is connected to one VM sandbox so agents can share it. The
@@ -178,9 +187,11 @@ ChatGPT or ImageKit, then saves them to another file. The Scheduler Agent schedu
 timezone, notifies the user, and saves everything to the database. The last agent publishes at the specific time using
 an Inngest function. (Do not implement)
 ```
+
 ```text
 Write it in a .md file.
 ```
+
 ```text
 A few things: video can only be published to social media platforms from the cloud VM, so the AI agent helps post it.
 In Settings we are adding a toggle to publish either through the VM cloud or through Blotato (fast post). The VM can also
@@ -205,9 +216,11 @@ error handling, and reusable architecture while maintaining the existing UI/UX.
 ```
 
 Follow-ups:
+
 ```text
 On the Agent page, the Master Agent chat shows loading and the send button is disabled. Something is wrong; fix it.
 ```
+
 ```text
 Replace the existing Publisher agent with an Analytics agent, which gives performance analytics based on a user request
 or a user-requested schedule through the Master Agent. Update all instructions and the office preview popover name
@@ -238,12 +251,15 @@ Plan first and show me the plan before coding.
 ```
 
 Follow-ups:
+
 ```text
 Make the concurrency limit 50 per agent across all users, remove the example code as well, and start implementing.
 ```
+
 ```text
 "The agent couldn't reply right now. Please try again." Error while chatting with the Master and other agents.
 ```
+
 ```text
 http://localhost:3000/api/agents/chat error: failed to fetch. Fix the chat issue.
 ```
@@ -296,62 +312,75 @@ click opens it on a big screen.
 ```
 
 Answers to the plan questions:
+
 ```text
 1. Use Inngest, 2. Do it, 3. Whichever is good, 4. Auto-pause after 3 minutes if it's idle, 5. (Ignore for now). Start
 implementing.
 ```
 
 Follow-ups (agent behavior in the sandbox):
+
 ```text
 When the Master Agent assigns a task to an agent and the user then adds some important information, add it to the
 existing task and pass it to the agent. Do not create a new task; update the existing agent task. Make sure the
 Research and Creator agents always use the browser in the sandbox to get the latest information unless the user
 specifically says otherwise. But if the agent has internal knowledge, don't use the browser every time.
 ```
+
 ```text
 When an agent uses the browser, make sure it opens the browser, clicks into it, opens the URL, and if login is needed,
 tells the user. The agent can do all operations and go back and forth with the AI model to perform actions in the E2B
 sandbox desktop. Refer to this doc: https://docs.e2b.dev/agents/codex
 ```
+
 ```text
 It looks like it's not able to perform any action inside the VM sandbox desktop after it starts. Refer to this doc:
 https://docs.e2b.dev/agents/codex. Do we need an AI agent with access to the sandbox to perform the task, or can our AI
 agent do it?
 ```
+
 ```text
 A few things: make sure our agent checks with the AI model on what to do. For example, if it opens an incorrect
 Instagram URL, it should check with the AI model, fix the URL, and try again. It should do the same for other tasks.
 Also, once a task is handed over to a specific agent, make sure that agent executes properly and does not get stuck,
 because right now nothing is working properly with the E2B sandbox.
 ```
+
 ```text
 Can you make multiple agents run in parallel (1 agent per task) when the assigned subtasks are not under one task and
 do not depend on each other?
 ```
+
 ```text
 Don't use the browser every time. If the AI agent knows the answer, answer from knowledge; there is no need to use the
 browser unless the AI doesn't have the answer and needs to check. Also, to generate post images, use the Gemini AI model,
 and use ImageKit for AI transformations.
 ```
+
 ```text
 Apply DB changes.
 ```
 
 UI and bug-fix follow-ups:
+
 ```text
 On the Agent page, let's move the top agent row to a vertical side bar with just icons; hover shows the name, and click
 shows the chat and everything to its right, so the chat area gets full height.
 ```
+
 ```text
 Remove this text: "AI Agents — Give the Master Agent your requests; it plans the work and runs the team".
 ```
+
 ```text
 After the app runs, it goes into an infinite loading loop. Fix it.
 ```
+
 ```text
 The Master Agent assigned a task to the Research Agent, but the status is not updated and nothing shows. Even under the
 Computer tab it's just loading.
 ```
+
 ```text
 When the Master Agent assigns a task, make sure it's sent to the agent. The bubble popover is not updating; I have to
 refresh manually. Fix that.
@@ -369,17 +398,20 @@ refresh manually. Fix that.
 All these agents are built for a social media platform, so make sure they focus on social-media-related questions,
 answers and work.
 ```
+
 ```text
 Make sure the Research Agent finishes its job in 3 to 5 minutes max, then the Creator Agent generates content within 3
 to 5 minutes, and scheduling does the same or less. If it takes longer, use whatever information the agent has and
 return the result.
 ```
+
 ```text
 When the user asks to generate an image or something, the Creator should create the image unless it has a question.
 Use the Gemini image model, or ImageKit if set up.
 ```
 
 Main tools prompt:
+
 ```text
 Implement OpenAI Agent SDK tools for the Research and Creator Agents using the existing architecture.
 
@@ -398,10 +430,12 @@ Also make sure the agent saves proper output from each assigned agent task in th
 ```
 
 Follow-ups:
+
 ```text
 "Image: not generated because no image tool is configured." Try and test it and let me know the result. Use Gemini to
 generate it.
 ```
+
 ```text
 When the Creator Agent generates an image and saves it to storage, also show a small preview inside the chat so the user
 knows the image was generated.
@@ -430,9 +464,11 @@ saved post on the Posts page. Actual publishing will be implemented later. Maint
 ```
 
 Follow-ups:
+
 ```text
 Don't show the top section ("Your content library … Scheduled / Drafts / AI ready" stats).
 ```
+
 ```text
 On the Posts page, when a scheduled post exists and has not been posted yet, allow the user to edit it and reschedule
 it if they want.
@@ -462,22 +498,27 @@ video/Shorts only.
 ```
 
 Follow-ups:
+
 ```text
 Use Blotato MCP tools to schedule the posts on the Posts page, and whenever the user schedules, make sure it's scheduled
 through the Blotato platform. Use the proper MCP tool for it.
 ```
+
 ```text
 Add Blotato scheduling MCP tools to the Scheduler Agent so it uses them to schedule posts as the user requests.
 ```
+
 ```text
 When I told the Master Agent to publish, it published directly to Blotato. It should give the task to the Scheduler
 Agent, which should schedule it and add the scheduled post to the database so it's visible to users on the Posts page
 as well.
 ```
+
 ```text
 Sometimes the Master Agent asks too many questions. Fix it so the Master Agent thinks before asking questions and
 replies with what it is doing. Its job is to plan, assign to sub-agents, and collect results from the other agents.
 ```
+
 ```text
 An AI-agent-generated post image gives an error while scheduling: "Some images aren't stored for this campaign. Upload
 them again."
