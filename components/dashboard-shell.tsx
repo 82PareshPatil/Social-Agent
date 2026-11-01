@@ -13,7 +13,7 @@ const menus = [
   { name: 'Posts', icon: FileText, color: 'orange', href: null },
   { name: 'Calendar', icon: CalendarDays, color: 'pink', href: null },
   { name: 'Analytics', icon: ChartNoAxesCombined, color: 'green', href: null },
-  { name: 'Accounts', icon: Users, color: 'cyan', href: null },
+  { name: 'Accounts', icon: Users, color: 'cyan', href: '/dashboard/accounts' },
   { name: 'Settings', icon: Settings2, color: 'gray', href: null },
 ];
 
