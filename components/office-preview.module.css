@@ -1,0 +1,18 @@
+.frame{position:relative;width:100%;height:100%;min-height:360px;overflow:hidden;border-radius:20px;background:#304966;display:grid;place-items:center;box-shadow:0 12px 36px #1f3a6a1f}
+.frame::before{content:'';position:absolute;inset:-24px;background:var(--office) center/cover;filter:blur(22px) brightness(.85);}
+.stage{position:relative;flex-shrink:0;border-radius:14px;overflow:visible;box-shadow:0 10px 30px #0f1e3a55}
+.background{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none;pointer-events:none}
+.agent{position:absolute;padding:0;border:0;background:none;cursor:pointer;transition:filter .2s,transform .2s}
+.agent img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;user-select:none}
+.agent:hover,.agent:focus-visible{filter:drop-shadow(0 0 14px #5b8dffcc);transform:translateY(-2px);outline:none}
+.active{filter:drop-shadow(0 0 16px #5b8dff)}
+.popover{position:absolute;left:50%;bottom:calc(100% - 6px);transform:translateX(-50%);display:flex;align-items:center;gap:6px;white-space:nowrap;font:600 11px Arial,Helvetica,sans-serif;padding:6px 10px;border-radius:99px;background:#fff;color:#33445e;box-shadow:0 6px 18px #1d3a6a33;opacity:.92;pointer-events:none}
+.popover::after{content:'';position:absolute;left:50%;top:100%;transform:translateX(-50%);border:5px solid transparent;border-top-color:#fff}
+.popover i{font-style:normal;font-size:13px}
+.active .popover{background:#3569f4;color:#fff;opacity:1}.active .popover::after{border-top-color:#3569f4}
+.purple i{filter:none}
+.loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:10px;color:#d2ddea;font:12px Arial,Helvetica,sans-serif}
+.loading span{width:14px;height:14px;border-radius:50%;border:2px solid #ffffff55;border-top-color:#fff;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:900px){.frame{min-height:300px;border-radius:16px}}
+@media(prefers-reduced-motion:reduce){.agent,.loading span{transition:none;animation:none}.agent:hover{transform:none}}
