@@ -9,4 +9,4 @@ export async function proxy(request: NextRequest) {
   return forwarded;
 }
 
-export const config = { matcher: ['/dashboard/:path*', '/create-campaign', '/sign-in', '/sign-up'] };
+export const config = { matcher: ['/dashboard/:path*', '/api/meta/:path*', '/create-campaign', '/sign-in', '/sign-up'] };
