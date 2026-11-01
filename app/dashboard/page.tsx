@@ -1,22 +1,14 @@
 import { redirect } from 'next/navigation';
 import { getInsForgeServer } from '@/lib/insforge-server';
-import { signOut } from '@/lib/auth-actions';
+import { firstCampaign } from '@/lib/campaigns';
+import { OverviewView } from '@/components/workspace-views';
 
-export default async function Dashboard() {
+export default async function Overview() {
   const client = await getInsForgeServer();
-  const { data: session, error: authError } = await client.auth.getCurrentUser();
-  if (authError || !session?.user) redirect('/sign-in');
-
-  // Idempotent: creates the profile row on first sign-in, refreshes email afterwards.
-  const { error } = await client.database.rpc('ensure_user_profile');
-  if (error) throw new Error('Your profile could not be loaded. Please retry.');
-  const { data: profile, error: readError } = await client.database.from('users')
-    .select('id, name, email, created_at').eq('id', session.user.id).single();
-  if (readError || !profile) throw new Error('Your profile could not be loaded. Please retry.');
-
-  return <main style={{ padding: '4rem', fontFamily: 'Arial, sans-serif' }}>
-    <h1>Welcome, {profile.name || 'Creator'}</h1>
-    <p>{profile.email}</p>
-    <form action={signOut}><button>Sign out</button></form>
-  </main>;
+  const { data: session } = await client.auth.getCurrentUser();
+  if (!session?.user) redirect('/sign-in');
+  const campaign = await firstCampaign(session.user.id);
+  if (!campaign) redirect('/create-campaign');
+  const { data: profile } = await client.database.from('users').select('name').eq('id', session.user.id).single();
+  return <OverviewView officeImage={campaign.office_image} campaignName={campaign.name} name={profile?.name || 'Creator'} />;
 }

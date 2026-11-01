@@ -1,0 +1,28 @@
+.panel{display:flex;flex-direction:column;min-height:0;height:100%;background:#fff;border:1px solid #e7ecf4;border-radius:16px;overflow:hidden}
+.header{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid #edf1f7}
+.header h2{font-size:14px;font-weight:600;margin:0;color:#33445e}
+.header p{display:flex;align-items:center;gap:6px;font-size:10px;color:#9aa7ba;margin:4px 0 0}
+.header p i{width:6px;height:6px;border-radius:50%;background:#72b49a}
+.avatar{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;font-size:20px;flex-shrink:0}
+.purple{background:#f0eaff}.orange{background:#fff1df}.pink{background:#fcebf3}.green{background:#e6f5ee}
+.close{margin-left:auto;border:0;background:none;color:#8b9bb5;cursor:pointer;padding:6px;border-radius:8px}.close:hover{background:#f3f6ff}
+.tabs{display:flex;gap:4px;padding:10px 14px 0;border-bottom:1px solid #edf1f7}
+.tabs button{display:flex;align-items:center;gap:6px;border:0;background:none;padding:9px 12px;font-size:11px;color:#8b9bb5;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button:hover{color:#526784}.tabs .on{color:#3569f4;border-bottom-color:#3569f4;font-weight:600}
+.messages{flex:1;min-height:0;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:10px;background:#fbfcff}
+.bubble{max-width:82%;font-size:12px;line-height:1.6;padding:10px 13px;border-radius:14px;overflow-wrap:anywhere}
+.agentBubble{background:#fff;border:1px solid #e7ecf4;color:#526784;border-bottom-left-radius:4px;align-self:flex-start}
+.userBubble{background:#3569f4;color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+.hint{display:flex;align-items:center;gap:6px;font-size:10px;color:#9aa7ba;margin:4px 0 0;align-self:center}
+.composer{display:flex;gap:8px;padding:12px 14px;border-top:1px solid #edf1f7;background:#fff}
+.composer input{flex:1;min-width:0;border:1px solid #e1e8f3;border-radius:10px;padding:11px 13px;font-size:12px;outline:none;color:#33445e}
+.composer input:focus{border-color:#3569f4;box-shadow:0 0 0 3px #3569f41a}
+.composer button{width:40px;border:0;border-radius:10px;background:#3569f4;color:#fff;display:grid;place-items:center;cursor:pointer}
+.composer button:disabled{background:#c9d6f5;cursor:not-allowed}
+.empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}
+.emptyArt{display:grid;place-items:center;width:52px;height:52px;border-radius:15px}
+.empty h3{font-size:13px;margin:15px 0 6px;color:#3b4a62}.empty p{font-size:11px;color:#9aa7ba;margin:0;max-width:260px;line-height:1.7}
+.settings{flex:1;padding:20px;overflow-y:auto}
+.settings h3{font-size:13px;margin:0 0 8px;color:#3b4a62}.settings p{font-size:12px;line-height:1.7;color:#7a879d;margin:0 0 18px}
+.settings dl{display:grid;grid-template-columns:auto 1fr;gap:10px 18px;font-size:11px;margin:0}
+.settings dt{color:#9aa7ba}.settings dd{margin:0;color:#526784}
